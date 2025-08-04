@@ -1,0 +1,4 @@
+{"level":"info","timestamp":"2025-08-03T23:42:28.890+0300","caller":"app/app.go:53","msg":"Connected to MongoDB successfully","pid":26688}
+{"level":"fatal","timestamp":"2025-08-03T23:42:58.891+0300","caller":"app/app.go:64","msg":"MongoDB ping failed: server selection error: server selection timeout, current topology: { Type: Unknown, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }\n","pid":26688}
+{"level":"info","timestamp":"2025-08-03T23:52:06.325+0300","caller":"app/app.go:53","msg":"Connected to MongoDB successfully","pid":29088}
+{"level":"fatal","timestamp":"2025-08-03T23:52:36.326+0300","caller":"app/app.go:64","msg":"MongoDB ping failed: server selection error: server selection timeout, current topology: { Type: Unknown, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }\n","pid":29088}

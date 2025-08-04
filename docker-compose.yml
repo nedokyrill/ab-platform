@@ -1,0 +1,60 @@
+networks:
+  dev:
+
+services:
+  ab-platform-server:
+    build:
+      context: .
+      dockerfile: build/app/Dockerfile
+    image: ab-platform-server
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+          cpus: '6.0'
+        reservations:
+          memory: 4G
+    container_name: ab-platform-server
+    command: ["sh", "-c", "go run /usr/src/app/cmd/mainApp/main.go"]
+    depends_on:
+      - mongo
+      - prometheus
+    environment:
+      - MONGODB_URI=mongodb://root:123123123@ab-platform-mongodb:27017/
+    ports:
+      - "8080:8080"
+    networks:
+      - dev
+
+  mongo:
+    image: mongo:7
+    container_name: ab-platform-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123123123
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - dev
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ab-platform-prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9000:9090"
+    networks:
+      - dev
+
+volumes:
+  mongo_data:
+
+
+
+
